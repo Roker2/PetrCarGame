@@ -47,3 +47,5 @@ out
 /proj.android/app/src/org/axmol/lib
 
 CMakeCache.txt
+
+Content/thirdPartyContent
