@@ -24,7 +24,7 @@
  ****************************************************************************/
 
 #include "AppDelegate.h"
-#include "MainScene.h"
+#include "GarageScene.h"
 
 #define USE_AUDIO_ENGINE 1
 
@@ -102,7 +102,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     }
 
     // create a scene. it's an autorelease object
-    auto scene = utils::createInstance<MainScene>();
+    auto scene = utils::createInstance<GarageScene>();
 
     // run
     director->runWithScene(scene);
