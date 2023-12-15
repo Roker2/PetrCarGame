@@ -1,5 +1,6 @@
 #include "GarageScene.h"
 
+#include "Car/Frame.h"
 #include "Controls/DoorButton.h"
 
 USING_NS_AX;
@@ -42,6 +43,10 @@ bool GarageScene::init()
 
     auto greenDoor = createDoor("thirdPartyContent/garage/GreenDoorClosed.png", "thirdPartyContent/garage/GreenDoorOpened.png", Vec2(70.f, 455.f));
     this->addChild(greenDoor);
+
+    auto carFrame = car::Frame::create("thirdPartyContent/garage/parts/frame.png");
+    carFrame->setPosition(Vec2(378.f, 185.f));
+    this->addChild(carFrame);
 
     // scheduleUpdate() is required to ensure update(float) is called on every loop
     scheduleUpdate();
