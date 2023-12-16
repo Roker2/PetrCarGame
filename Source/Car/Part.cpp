@@ -36,6 +36,7 @@ bool Part::init(std::string_view previewImage, ax::ui::Widget::TextureResType te
 
     initPreviewTexture(previewImage, texType);
     setContentSize(_previewSprite->getContentSize());
+    _previewSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
 
     return true;
 }
