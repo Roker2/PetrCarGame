@@ -26,6 +26,12 @@ protected:
     void initPreviewTexture(std::string_view filename,
                             ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
 
+private:
+    // touch
+    bool onTouchBegan(ax::Touch* touch, ax::Event* event) override;
+    void onTouchMoved(ax::Touch* touch, ax::Event* event) override;
+    void onTouchEnded(ax::Touch* touch, ax::Event* event) override;
+
 protected:
     ax::Sprite* _previewSprite;
 
