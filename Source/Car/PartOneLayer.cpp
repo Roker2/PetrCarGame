@@ -44,6 +44,30 @@ bool PartOneLayer::init(std::string_view previewImage,
     return true;
 }
 
+void PartOneLayer::setInstalled()
+{
+    if (_isInstalled)
+    {
+        return;
+    }
+    _isInstalled = true;
+    _previewSprite->setVisible(false);
+    _normalSprite->setVisible(true);
+    setContentSize(_normalSprite->getContentSize());
+}
+
+void PartOneLayer::setPreview()
+{
+    if (!_isInstalled)
+    {
+        return;
+    }
+    _isInstalled = false;
+    _previewSprite->setVisible(true);
+    setContentSize(_previewSprite->getContentSize());
+    _normalSprite->setVisible(false);
+}
+
 void PartOneLayer::initRenderer()
 {
     Part::initRenderer();

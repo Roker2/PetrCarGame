@@ -18,6 +18,9 @@ public:
               std::string_view normalImage,
               ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
 
+    virtual void setInstalled() override;
+    virtual void setPreview() override;
+
 protected:
     virtual void initRenderer() override;
 
