@@ -3,6 +3,14 @@
 namespace car
 {
 
+PartEngine::PartEngine()
+    : PartOneLayer()
+    , speed(0)
+    , fuelConsumption(0)
+    , strength(0)
+{
+}
+
 PartEngine* PartEngine::create(std::string_view previewImage,
                                std::string_view normalImage,
                                TextureResType texType)
