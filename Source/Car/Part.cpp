@@ -12,6 +12,7 @@ Part::Part()
     , _previewFileName("")
     , _previewTexType(TextureResType::LOCAL)
     , _onTouchMovingCallback(nullptr)
+    , _isInstalled(false)
 {
     setTouchEnabled(true);
 }
@@ -50,6 +51,16 @@ void Part::SetOnTouchMovingCallback(onTouchMovingCallback callback) noexcept
 PartType Part::getType() const noexcept
 {
     return PartType::None;
+}
+
+void Part::setInstalled()
+{
+
+}
+
+void Part::setPreview()
+{
+
 }
 
 void Part::initRenderer()

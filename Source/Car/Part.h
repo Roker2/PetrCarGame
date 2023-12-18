@@ -23,6 +23,8 @@ public:
     void SetOnTouchMovingCallback(onTouchMovingCallback callback) noexcept;
 
     virtual PartType getType() const noexcept;
+    virtual void setInstalled();
+    virtual void setPreview();
 
 protected:
     virtual void initRenderer() override;
@@ -45,6 +47,7 @@ protected:
     ax::ui::Widget::TextureResType _previewTexType;
 
     onTouchMovingCallback _onTouchMovingCallback;
+    bool _isInstalled;
 };
 
 } // namespace car
