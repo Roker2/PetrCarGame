@@ -9,6 +9,8 @@ namespace car
 
 class Part : public ax::ui::Widget
 {
+    using onTouchMovingCallback = std::function<void(ax::Touch*, ax::Event*)>;
+
 public:
     Part();
     virtual ~Part() = default;
@@ -17,6 +19,8 @@ public:
                         ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
     bool init(std::string_view previewImage,
               ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
+
+    void SetOnTouchMovingCallback(onTouchMovingCallback callback) noexcept;
 
     virtual PartType getType() const noexcept;
 
@@ -39,6 +43,8 @@ protected:
 
     std::string _previewFileName;
     ax::ui::Widget::TextureResType _previewTexType;
+
+    onTouchMovingCallback _onTouchMovingCallback;
 };
 
 } // namespace car

@@ -11,6 +11,7 @@ Part::Part()
     , _previewSpriteLoaded(false)
     , _previewFileName("")
     , _previewTexType(TextureResType::LOCAL)
+    , _onTouchMovingCallback(nullptr)
 {
     setTouchEnabled(true);
 }
@@ -39,6 +40,11 @@ bool Part::init(std::string_view previewImage, ax::ui::Widget::TextureResType te
     _previewSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
 
     return true;
+}
+
+void Part::SetOnTouchMovingCallback(onTouchMovingCallback callback) noexcept
+{
+    _onTouchMovingCallback = callback;
 }
 
 PartType Part::getType() const noexcept
@@ -113,6 +119,11 @@ void Part::onTouchMoved(ax::Touch* touch, ax::Event* event)
     }
 #endif
     setPosition(newPos);
+
+    if (_onTouchMovingCallback)
+    {
+        _onTouchMovingCallback(touch, event);
+    }
 }
 
 void Part::onTouchEnded(ax::Touch* touch, ax::Event* event)
