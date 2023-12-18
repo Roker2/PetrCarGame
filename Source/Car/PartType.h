@@ -12,7 +12,8 @@ enum class PartType
     BodyMiddle,
     BodyRear,
     SteeringWheel,
-    Wheels
+    Wheels,
+    Seat
 };
 
 } // namespace car
