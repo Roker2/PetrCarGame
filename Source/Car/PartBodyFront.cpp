@@ -3,6 +3,13 @@
 namespace car
 {
 
+PartBodyFront::PartBodyFront()
+    : PartOneLayer()
+    , color(0)
+    , funnyFactor(0)
+{
+}
+
 PartBodyFront* PartBodyFront::create(std::string_view previewImage,
                            std::string_view normalImage,
                            TextureResType texType)
