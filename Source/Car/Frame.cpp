@@ -39,9 +39,23 @@ bool Frame::initWithFile(std::string_view filename, PixelFormat format)
 
 void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
 {
-    if (part->getName().empty())
-        return;
-    AXLOG(part->getName().data());
+    if (part != nullptr)
+    {
+        for (const auto& partArea : _partAreas)
+        {
+            if (partArea.partTypeEquals(part->getType())
+                && partArea.containsPoint(touch->getLocation()))
+            {
+#if _AX_DEBUG > 0
+                AXLOG("Catched %s, set to needed position", part->getName());
+#endif
+                const auto& contentSize = part->getContentSize();
+                part->setPosition(Vec2(partArea.getMinX() + contentSize.x / 2.f,
+                    partArea.getMinY() + contentSize.y / 2.f));
+                break;
+            }
+        }
+    }
 }
 
 } // namespace car
