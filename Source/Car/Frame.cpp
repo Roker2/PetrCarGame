@@ -41,6 +41,7 @@ void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
 {
     if (part != nullptr)
     {
+        bool isInstalled{ false };
         for (const auto& partArea : _partAreas)
         {
             if (partArea.partTypeEquals(part->getType())
@@ -49,11 +50,18 @@ void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
 #if _AX_DEBUG > 0
                 AXLOG("Catched %s, set to needed position", part->getName());
 #endif
+                part->setInstalled();
                 const auto& contentSize = part->getContentSize();
                 part->setPosition(Vec2(partArea.getMinX() + contentSize.x / 2.f,
                     partArea.getMinY() + contentSize.y / 2.f));
+                isInstalled = true;
                 break;
             }
+        }
+        // Roker2: refactor it later
+        if (!isInstalled)
+        {
+            part->setPreview();
         }
     }
 }
