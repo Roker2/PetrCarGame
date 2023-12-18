@@ -3,6 +3,12 @@
 namespace car
 {
 
+PartSeat::PartSeat()
+    : PartOneLayer()
+    , comfort(0)
+{
+}
+
 PartSeat* PartSeat::create(std::string_view previewImage,
                            std::string_view normalImage,
                            TextureResType texType)
