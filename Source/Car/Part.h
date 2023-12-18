@@ -38,6 +38,9 @@ private:
     void onTouchMoved(ax::Touch* touch, ax::Event* event) override;
     void onTouchEnded(ax::Touch* touch, ax::Event* event) override;
 
+public:
+    size_t weight;
+
 protected:
     ax::Sprite* _previewSprite;
 

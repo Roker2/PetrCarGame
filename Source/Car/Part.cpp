@@ -7,6 +7,7 @@ namespace car
 
 Part::Part()
     : ui::Widget()
+    , weight(0)
     , _previewSprite(nullptr)
     , _previewSpriteLoaded(false)
     , _previewFileName("")
