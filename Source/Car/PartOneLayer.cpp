@@ -39,6 +39,7 @@ bool PartOneLayer::init(std::string_view previewImage,
 
     initNormalTexture(normalImage, texType);
     _normalSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
+    _normalSprite->setVisible(false);
 
     return true;
 }
