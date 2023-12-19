@@ -25,6 +25,7 @@ public:
     virtual PartType getType() const noexcept;
     virtual void setInstalled();
     virtual void setPreview();
+    bool getIsInstalled() const noexcept;
 
 protected:
     virtual void initRenderer() override;

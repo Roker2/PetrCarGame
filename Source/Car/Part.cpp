@@ -64,6 +64,11 @@ void Part::setPreview()
 
 }
 
+bool Part::getIsInstalled() const noexcept
+{
+    return _isInstalled;
+}
+
 void Part::initRenderer()
 {
     _previewSprite = Sprite::create();
