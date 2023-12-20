@@ -51,7 +51,7 @@ void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
                 && partArea.containsPoint(touch->getLocation()))
             {
 #if _AX_DEBUG > 0
-                AXLOG("Catched %s, set to needed position", part->getName());
+                AXLOG("Catched \"%s\", set to needed position", part->getName().data());
 #endif
                 part->setInstalled();
                 const auto& contentSize = part->getContentSize();
