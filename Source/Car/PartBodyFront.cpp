@@ -5,7 +5,7 @@ namespace car
 
 PartBodyFront::PartBodyFront()
     : PartOneLayer()
-    , color(0)
+    , PartBodyBase()
     , funnyFactor(0)
 {
 }

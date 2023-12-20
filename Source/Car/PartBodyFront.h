@@ -1,11 +1,12 @@
 #pragma once
 
 #include "PartOneLayer.h"
+#include "PartBodyBase.h"
 
 namespace car
 {
 
-class PartBodyFront : public PartOneLayer
+class PartBodyFront : public PartOneLayer, public PartBodyBase
 {
 public:
     PartBodyFront();
@@ -17,7 +18,6 @@ public:
     virtual PartType getType() const noexcept override;
 
 public:
-    size_t color;
     size_t funnyFactor;
 };
 
