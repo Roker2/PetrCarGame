@@ -68,6 +68,15 @@ void PartOneLayer::setPreview()
     _normalSprite->setVisible(false);
 }
 
+void PartOneLayer::setGlobalZOrder(float globalZOrder)
+{
+    Part::setGlobalZOrder(globalZOrder);
+    if (_isInstalled)
+    {
+        _normalSprite->setGlobalZOrder(globalZOrder);
+    }
+}
+
 void PartOneLayer::initRenderer()
 {
     Part::initRenderer();

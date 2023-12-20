@@ -95,6 +95,16 @@ void PartTwoLayer::setPreview()
     _normalBackSprite->setVisible(false);
 }
 
+void PartTwoLayer::setGlobalZOrder(float globalZOrder)
+{
+    Part::setGlobalZOrder(globalZOrder);
+    if (_isInstalled)
+    {
+        _normalFrontSprite->setGlobalZOrder(globalZOrder);
+        _normalBackSprite->setGlobalZOrder(globalZOrder - 4.f);
+    }
+}
+
 void PartTwoLayer::initRenderer()
 {
     Part::initRenderer();

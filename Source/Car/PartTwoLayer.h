@@ -26,6 +26,7 @@ public:
 
     virtual void setInstalled() override;
     virtual void setPreview() override;
+    virtual void setGlobalZOrder(float globalZOrder) override;
 
 protected:
     virtual void initRenderer() override;
