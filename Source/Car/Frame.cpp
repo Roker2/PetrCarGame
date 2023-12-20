@@ -35,6 +35,7 @@ bool Frame::initWithFile(std::string_view filename, PixelFormat format)
 
     _partAreas.push_back(PartArea(208.f, 161.f, 114.f, 70.f, PartType::Engine, 12.f));
     _partAreas.push_back(PartArea(311.f, 158.f, 122.f, 121.f, PartType::Seat, 8.f));
+    _partAreas.push_back(PartArea(165.f, 135.f, 190.f, 144.f, PartType::BodyFront, 14.f));
     _partAreas.push_back(PartArea(277.f, 144.f, 186.f, 176.f, PartType::BodyMiddle, 10.f));
     _partAreas.push_back(PartArea(385.f, 155.f, 220.f, 180.f, PartType::BodyRear, 5.f));
     return true;
