@@ -119,6 +119,7 @@ bool Part::onTouchBegan(ax::Touch* touch, ax::Event* event)
 #if _AX_DEBUG > 0
         AXLOG("Part contain touch");
 #endif
+        setPosition(touch->getLocation());
         return true;
     }
     return false;
