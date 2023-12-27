@@ -33,11 +33,11 @@ bool Frame::initWithFile(std::string_view filename, PixelFormat format)
         return false;
     }
 
-    _partAreas.push_back(PartArea(208.f, 161.f, 114.f, 70.f, PartType::Engine, 12.f));
-    _partAreas.push_back(PartArea(311.f, 158.f, 122.f, 121.f, PartType::Seat, 8.f));
-    _partAreas.push_back(PartArea(165.f, 135.f, 190.f, 144.f, PartType::BodyFront, 14.f));
-    _partAreas.push_back(PartArea(277.f, 144.f, 186.f, 176.f, PartType::BodyMiddle, 10.f));
-    _partAreas.push_back(PartArea(385.f, 155.f, 220.f, 180.f, PartType::BodyRear, 5.f));
+    _partAreas.push_back(PartArea(237.f, 165.f, 73.f, 81.f, PartType::Engine, 12.f));
+    _partAreas.push_back(PartArea(360.f, 186.f, 72.f, 103.f, PartType::Seat, 8.f));
+    _partAreas.push_back(PartArea(207.f, 202.f, 190.f, 54.f, PartType::BodyFront, 14.f));
+    _partAreas.push_back(PartArea(342.f, 202.f, 49.f, 128.f, PartType::BodyMiddle, 10.f));
+    _partAreas.push_back(PartArea(465.f, 181.f, 49.f, 125.f, PartType::BodyRear, 5.f));
     return true;
 }
 
@@ -56,8 +56,8 @@ void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
 #endif
                 part->setInstalled();
                 const auto& contentSize = part->getContentSize();
-                part->setPosition(Vec2(partArea.getMinX() + contentSize.x / 2.f,
-                    partArea.getMinY() + contentSize.y / 2.f));
+                part->setPosition(Vec2(partArea.getMinX() + part->getInstalledOffset().x,
+                    partArea.getMinY() + part->getInstalledOffset().y));
                 part->setGlobalZOrder(partArea.getZOrder());
                 isInstalled = true;
                 break;
