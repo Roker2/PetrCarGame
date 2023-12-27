@@ -16,12 +16,14 @@ public:
                                 std::string_view normalBackImage,
                                 const ax::Vec2& frontImagePos,
                                 const ax::Vec2& backImagePos,
+                                const ax::Vec2& installedOffset = ax::Vec2(),
                                 ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
     bool init(std::string_view previewImage,
               std::string_view normalFrontImage,
               std::string_view normalBackImage,
               const ax::Vec2& frontImagePos,
               const ax::Vec2& backImagePos,
+              const ax::Vec2& installedOffset = ax::Vec2(),
               ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
 
     virtual void setInstalled() override;

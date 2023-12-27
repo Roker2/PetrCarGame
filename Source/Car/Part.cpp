@@ -14,14 +14,17 @@ Part::Part()
     , _previewTexType(TextureResType::LOCAL)
     , _onTouchMovingCallback(nullptr)
     , _isInstalled(false)
+    , _installedOffset()
 {
     setTouchEnabled(true);
 }
 
-Part* Part::create(std::string_view previewImage, ax::ui::Widget::TextureResType texType)
+Part* Part::create(std::string_view previewImage,
+    const ax::Vec2& installedOffset,
+    ax::ui::Widget::TextureResType texType)
 {
     Part* part = new Part();
-    if (part->init(previewImage, texType))
+    if (part->init(previewImage, installedOffset, texType))
     {
         part->autorelease();
         return part;
@@ -30,7 +33,9 @@ Part* Part::create(std::string_view previewImage, ax::ui::Widget::TextureResType
     return nullptr;
 }
 
-bool Part::init(std::string_view previewImage, ax::ui::Widget::TextureResType texType)
+bool Part::init(std::string_view previewImage,
+    const ax::Vec2& installedOffset,
+    ax::ui::Widget::TextureResType texType)
 {
     if (!Widget::init())
     {
@@ -40,6 +45,8 @@ bool Part::init(std::string_view previewImage, ax::ui::Widget::TextureResType te
     initPreviewTexture(previewImage, texType);
     setContentSize(_previewSprite->getContentSize());
     _previewSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
+
+    _installedOffset = installedOffset;
 
     return true;
 }
@@ -67,6 +74,11 @@ void Part::setPreview()
 bool Part::getIsInstalled() const noexcept
 {
     return _isInstalled;
+}
+
+const Vec2& Part::getInstalledOffset() const noexcept
+{
+    return _installedOffset;
 }
 
 void Part::initRenderer()

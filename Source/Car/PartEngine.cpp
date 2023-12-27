@@ -13,10 +13,11 @@ PartEngine::PartEngine()
 
 PartEngine* PartEngine::create(std::string_view previewImage,
                                std::string_view normalImage,
+                               const ax::Vec2& installedOffset,
                                TextureResType texType)
 {
     PartEngine* part = new PartEngine();
-    if (part->init(previewImage, normalImage, texType))
+    if (part->init(previewImage, normalImage, installedOffset, texType))
     {
         part->autorelease();
         return part;

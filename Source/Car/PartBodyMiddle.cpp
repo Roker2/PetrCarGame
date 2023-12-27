@@ -14,11 +14,12 @@ PartBodyMiddle* PartBodyMiddle::create(std::string_view previewImage,
     std::string_view normalBackImage,
     const ax::Vec2& frontImagePos,
     const ax::Vec2& backImagePos,
+    const ax::Vec2& installedOffset,
     TextureResType texType)
 {
     PartBodyMiddle* part = new PartBodyMiddle();
     if (part->init(previewImage, normalFrontImage, normalBackImage,
-        frontImagePos, backImagePos, texType))
+        frontImagePos, backImagePos, installedOffset, texType))
     {
         part->autorelease();
         return part;

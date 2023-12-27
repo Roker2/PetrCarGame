@@ -16,8 +16,10 @@ public:
     virtual ~Part() = default;
 
     static Part* create(std::string_view previewImage,
+                        const ax::Vec2& installedOffset = ax::Vec2(),
                         ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
     bool init(std::string_view previewImage,
+              const ax::Vec2& installedOffset = ax::Vec2(),
               ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
 
     void SetOnTouchMovingCallback(onTouchMovingCallback callback) noexcept;
@@ -26,6 +28,7 @@ public:
     virtual void setInstalled();
     virtual void setPreview();
     bool getIsInstalled() const noexcept;
+    const ax::Vec2& getInstalledOffset() const noexcept;
 
 protected:
     virtual void initRenderer() override;
@@ -52,6 +55,7 @@ protected:
 
     onTouchMovingCallback _onTouchMovingCallback;
     bool _isInstalled;
+    ax::Vec2 _installedOffset;
 };
 
 } // namespace car

@@ -16,10 +16,11 @@ PartOneLayer::PartOneLayer()
 
 PartOneLayer* PartOneLayer::create(std::string_view previewImage,
                                    std::string_view normalImage,
+                                   const Vec2& installedOffset,
                                    ui::Widget::TextureResType texType)
 {
     PartOneLayer* part = new PartOneLayer();
-    if (part->init(previewImage, normalImage, texType))
+    if (part->init(previewImage, normalImage, installedOffset, texType))
     {
         part->autorelease();
         return part;
@@ -30,9 +31,10 @@ PartOneLayer* PartOneLayer::create(std::string_view previewImage,
 
 bool PartOneLayer::init(std::string_view previewImage,
                         std::string_view normalImage,
+                        const Vec2& installedOffset,
                         ui::Widget::TextureResType texType)
 {
-    if (!Part::init(previewImage, texType))
+    if (!Part::init(previewImage, installedOffset, texType))
     {
         return false;
     }

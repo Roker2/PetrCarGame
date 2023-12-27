@@ -12,10 +12,11 @@ PartBodyFront::PartBodyFront()
 
 PartBodyFront* PartBodyFront::create(std::string_view previewImage,
                            std::string_view normalImage,
+                           const ax::Vec2& installedOffset,
                            TextureResType texType)
 {
     PartBodyFront* part = new PartBodyFront();
-    if (part->init(previewImage, normalImage, texType))
+    if (part->init(previewImage, normalImage, installedOffset, texType))
     {
         part->autorelease();
         return part;
