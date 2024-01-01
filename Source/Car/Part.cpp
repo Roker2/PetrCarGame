@@ -122,6 +122,7 @@ void Part::loadFromJson(std::string_view filename)
 
 void Part::initRenderer()
 {
+    Widget::initRenderer();
     _previewSprite = Sprite::create();
     addChild(_previewSprite);
 }
