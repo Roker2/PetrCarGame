@@ -1,6 +1,14 @@
 #include "PartOneLayer.h"
+#include "JSONDefault/JSONBasic.h"
 
 USING_NS_AX;
+USING_NS_AX_EXT;
+
+namespace
+{
+const char* normalFileNameProp = "normalFileName";
+const char* normalTexTypeProp = "normalTexType";
+} // namespace
 
 namespace car
 {
@@ -106,6 +114,21 @@ void PartOneLayer::initNormalTexture(std::string_view filename,
             break;
         }
     }
+}
+
+void PartOneLayer::savePropertiesToJson(JSONBasic* jsonBasic) const
+{
+    Part::savePropertiesToJson(jsonBasic);
+    jsonBasic->setStringForKey(normalFileNameProp, _normalFileName.c_str());
+    jsonBasic->setIntegerForKey(normalTexTypeProp, static_cast<int>(_normalTexType));
+}
+
+void PartOneLayer::loadPropertiesFromJson(JSONBasic* jsonBasic)
+{
+    Part::loadPropertiesFromJson(jsonBasic);
+    auto normalFileName = jsonBasic->getStringForKey(normalFileNameProp);
+    auto normalTexType = static_cast<TextureResType>(jsonBasic->getIntegerForKey(normalTexTypeProp));
+    initNormalTexture(normalFileName, normalTexType);
 }
 
 } // namespace car

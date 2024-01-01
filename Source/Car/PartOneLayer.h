@@ -30,6 +30,9 @@ protected:
     void initNormalTexture(std::string_view filename,
                            ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
 
+    virtual void savePropertiesToJson(ax::extension::JSONBasic* jsonBasic) const override;
+    virtual void loadPropertiesFromJson(ax::extension::JSONBasic* jsonBasic) override;
+
 protected:
     ax::Sprite* _normalSprite;
 

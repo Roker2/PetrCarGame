@@ -2,7 +2,13 @@
 
 #include "axmol.h"
 #include "ui/UIWidget.h"
+#include "rapidjson/document.h"
 #include "PartType.h"
+
+namespace ax::extension
+{
+    class JSONBasic;
+} // namespace ax::extension
 
 namespace car
 {
@@ -30,11 +36,17 @@ public:
     bool getIsInstalled() const noexcept;
     const ax::Vec2& getInstalledOffset() const noexcept;
 
+    void saveToJson(std::string_view filename) const;
+    void loadFromJson(std::string_view filename);
+
 protected:
     virtual void initRenderer() override;
 
     void initPreviewTexture(std::string_view filename,
                             ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
+
+    virtual void savePropertiesToJson(ax::extension::JSONBasic* jsonBasic) const;
+    virtual void loadPropertiesFromJson(ax::extension::JSONBasic* jsonBasic);
 
 private:
     // touch

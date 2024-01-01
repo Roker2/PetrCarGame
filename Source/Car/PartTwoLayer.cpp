@@ -1,6 +1,20 @@
 #include "PartTwoLayer.h"
+#include "JSONDefault/JSONBasic.h"
 
 USING_NS_AX;
+USING_NS_AX_EXT;
+
+namespace
+{
+const char* normalFrontFileNameProp = "normalFrontFileName";
+const char* normalFrontTexTypeProp = "normalFrontTexType";
+const char* normalBackFileNameProp = "normalBackFileName";
+const char* normalBackTexTypeProp = "normalBackTexType";
+const char* frontImagePosXProp = "frontImagePosX";
+const char* frontImagePosYProp = "frontImagePosY";
+const char* backImagePosXProp = "backImagePosX";
+const char* backImagePosYProp = "backImagePosY";
+} // namespace
 
 namespace car
 {
@@ -158,6 +172,38 @@ void PartTwoLayer::initNormalBackTexture(std::string_view filename,
             break;
         }
     }
+}
+
+void PartTwoLayer::savePropertiesToJson(JSONBasic* jsonBasic) const
+{
+    Part::savePropertiesToJson(jsonBasic);
+    jsonBasic->setStringForKey(normalFrontFileNameProp, _normalFrontFileName.c_str());
+    jsonBasic->setIntegerForKey(normalFrontTexTypeProp, static_cast<int>(_normalFrontTexType));
+    jsonBasic->setStringForKey(normalBackFileNameProp, _normalBackFileName.c_str());
+    jsonBasic->setIntegerForKey(normalBackTexTypeProp, static_cast<int>(_normalBackTexType));
+
+    jsonBasic->setFloatForKey(frontImagePosXProp, _normalFrontSprite->getPositionX());
+    jsonBasic->setFloatForKey(frontImagePosYProp, _normalFrontSprite->getPositionY());
+    jsonBasic->setFloatForKey(backImagePosXProp, _normalBackSprite->getPositionX());
+    jsonBasic->setFloatForKey(backImagePosYProp, _normalBackSprite->getPositionY());
+}
+
+void PartTwoLayer::loadPropertiesFromJson(JSONBasic* jsonBasic)
+{
+    Part::loadPropertiesFromJson(jsonBasic);
+    auto normalFrontFileName = jsonBasic->getStringForKey(normalFrontFileNameProp);
+    auto normalFrontTexType = static_cast<TextureResType>(jsonBasic->getIntegerForKey(normalFrontTexTypeProp));
+    initNormalFrontTexture(normalFrontFileName, normalFrontTexType);
+    auto normalBackFileName = jsonBasic->getStringForKey(normalBackFileNameProp);
+    auto normalBackTexType = static_cast<TextureResType>(jsonBasic->getIntegerForKey(normalBackTexTypeProp));
+    initNormalBackTexture(normalFrontFileName, normalFrontTexType);
+
+    Vec2 frontImagePos;
+    frontImagePos.x = jsonBasic->getFloatForKey(frontImagePosXProp);
+    frontImagePos.y = jsonBasic->getFloatForKey(frontImagePosYProp);
+    Vec2 backImagePos;
+    backImagePos.x = jsonBasic->getFloatForKey(backImagePosXProp);
+    backImagePos.y = jsonBasic->getFloatForKey(backImagePosYProp);
 }
 
 } // namespace car

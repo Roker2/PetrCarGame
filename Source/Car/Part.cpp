@@ -1,6 +1,18 @@
 #include "Part.h"
+#include "JSONDefault/JSONBasic.h"
+#include <iostream>
+#include <fstream>
 
 USING_NS_AX;
+USING_NS_AX_EXT;
+
+namespace
+{
+const char* previewFileNameProp = "previewFileName";
+const char* previewTexTypeProp = "previewTexType";
+const char* installedOffsetXProp = "installedOffsetX";
+const char* installedOffsetYProp = "installedOffsetY";
+} // namespace
 
 namespace car
 {
@@ -81,6 +93,33 @@ const Vec2& Part::getInstalledOffset() const noexcept
     return _installedOffset;
 }
 
+void Part::saveToJson(std::string_view filename) const
+{
+    if (!FileUtils::getInstance()->isFileExist(filename))
+    {
+        std::ofstream outfile(filename.data());
+        outfile << "{}" << std::endl;
+        outfile.close();
+    }
+    auto jsonBasic = new JSONBasic(FileUtils::getInstance()->fullPathForFilename(filename));
+    savePropertiesToJson(jsonBasic);
+    jsonBasic->flush();
+    AX_SAFE_DELETE(jsonBasic);
+}
+
+void Part::loadFromJson(std::string_view filename)
+{
+    if (FileUtils::getInstance()->isFileExist(filename))
+    {
+        auto jsonBasic = new JSONBasic(FileUtils::getInstance()->fullPathForFilename(filename));
+        loadPropertiesFromJson(jsonBasic);
+    }
+    else
+    {
+        AXLOGERROR("Path %s not exist", filename.data());
+    }
+}
+
 void Part::initRenderer()
 {
     _previewSprite = Sprite::create();
@@ -106,6 +145,23 @@ void Part::initPreviewTexture(std::string_view filename, ui::Widget::TextureResT
             break;
         }
     }
+}
+
+void Part::savePropertiesToJson(JSONBasic* jsonBasic) const
+{
+    jsonBasic->setStringForKey(previewFileNameProp, _previewFileName.c_str());
+    jsonBasic->setIntegerForKey(previewTexTypeProp, static_cast<int>(_previewTexType));
+    jsonBasic->setFloatForKey(installedOffsetXProp, _installedOffset.x);
+    jsonBasic->setFloatForKey(installedOffsetYProp, _installedOffset.y);
+}
+
+void Part::loadPropertiesFromJson(JSONBasic* jsonBasic)
+{
+    auto previewFileName = jsonBasic->getStringForKey(previewFileNameProp);
+    auto previewTexType = static_cast<TextureResType>(jsonBasic->getIntegerForKey(previewTexTypeProp));
+    _installedOffset.x = jsonBasic->getFloatForKey(installedOffsetXProp);
+    _installedOffset.y = jsonBasic->getFloatForKey(installedOffsetYProp);
+    initPreviewTexture(previewFileName, previewTexType);
 }
 
 bool Part::onTouchBegan(ax::Touch* touch, ax::Event* event)
