@@ -25,6 +25,18 @@ PartBodyFront* PartBodyFront::create(std::string_view previewImage,
     return nullptr;
 }
 
+PartBodyFront* PartBodyFront::createFromJson(std::string_view filename)
+{
+    PartBodyFront* part = new PartBodyFront();
+    if (part->loadFromJson(filename))
+    {
+        part->autorelease();
+        return part;
+    }
+    AX_SAFE_DELETE(part);
+    return nullptr;
+}
+
 PartType PartBodyFront::getType() const noexcept
 {
     return PartType::BodyFront;

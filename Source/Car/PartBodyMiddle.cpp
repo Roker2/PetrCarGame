@@ -28,6 +28,18 @@ PartBodyMiddle* PartBodyMiddle::create(std::string_view previewImage,
     return nullptr;
 }
 
+PartBodyMiddle* PartBodyMiddle::createFromJson(std::string_view filename)
+{
+    PartBodyMiddle* part = new PartBodyMiddle();
+    if (part->loadFromJson(filename))
+    {
+        part->autorelease();
+        return part;
+    }
+    AX_SAFE_DELETE(part);
+    return nullptr;
+}
+
 PartType PartBodyMiddle::getType() const noexcept
 {
     return PartType::BodyMiddle;

@@ -26,6 +26,18 @@ PartEngine* PartEngine::create(std::string_view previewImage,
     return nullptr;
 }
 
+PartEngine* PartEngine::createFromJson(std::string_view filename)
+{
+    PartEngine* part = new PartEngine();
+    if (part->loadFromJson(filename))
+    {
+        part->autorelease();
+        return part;
+    }
+    AX_SAFE_DELETE(part);
+    return nullptr;
+}
+
 PartType PartEngine::getType() const noexcept
 {
     return PartType::Engine;

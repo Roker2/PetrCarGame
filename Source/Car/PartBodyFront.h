@@ -15,6 +15,7 @@ public:
                                  std::string_view normalImage,
                                  const ax::Vec2& installedOffset = ax::Vec2(),
                                  ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
+    static PartBodyFront* createFromJson(std::string_view filename);
 
     virtual PartType getType() const noexcept override;
 

@@ -28,6 +28,18 @@ PartBodyRear* PartBodyRear::create(std::string_view previewImage,
     return nullptr;
 }
 
+PartBodyRear* PartBodyRear::createFromJson(std::string_view filename)
+{
+    PartBodyRear* part = new PartBodyRear();
+    if (part->loadFromJson(filename))
+    {
+        part->autorelease();
+        return part;
+    }
+    AX_SAFE_DELETE(part);
+    return nullptr;
+}
+
 PartType PartBodyRear::getType() const noexcept
 {
     return PartType::BodyRear;

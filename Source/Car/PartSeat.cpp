@@ -24,6 +24,18 @@ PartSeat* PartSeat::create(std::string_view previewImage,
     return nullptr;
 }
 
+PartSeat* PartSeat::createFromJson(std::string_view filename)
+{
+    PartSeat* part = new PartSeat();
+    if (part->loadFromJson(filename))
+    {
+        part->autorelease();
+        return part;
+    }
+    AX_SAFE_DELETE(part);
+    return nullptr;
+}
+
 PartType PartSeat::getType() const noexcept
 {
     return PartType::Seat;

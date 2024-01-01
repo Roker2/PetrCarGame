@@ -24,6 +24,7 @@ public:
     static Part* create(std::string_view previewImage,
                         const ax::Vec2& installedOffset = ax::Vec2(),
                         ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
+    static Part* createFromJson(std::string_view filename);
     bool init(std::string_view previewImage,
               const ax::Vec2& installedOffset = ax::Vec2(),
               ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
@@ -37,7 +38,7 @@ public:
     const ax::Vec2& getInstalledOffset() const noexcept;
 
     void saveToJson(std::string_view filename) const;
-    void loadFromJson(std::string_view filename);
+    bool loadFromJson(std::string_view filename);
 
 protected:
     virtual void initRenderer() override;
@@ -53,6 +54,8 @@ private:
     bool onTouchBegan(ax::Touch* touch, ax::Event* event) override;
     void onTouchMoved(ax::Touch* touch, ax::Event* event) override;
     void onTouchEnded(ax::Touch* touch, ax::Event* event) override;
+
+    void commonInit();
 
 public:
     size_t weight;

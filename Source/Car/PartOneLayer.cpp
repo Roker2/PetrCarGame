@@ -37,6 +37,18 @@ PartOneLayer* PartOneLayer::create(std::string_view previewImage,
     return nullptr;
 }
 
+PartOneLayer* PartOneLayer::createFromJson(std::string_view filename)
+{
+    PartOneLayer* part = new PartOneLayer();
+    if (part->loadFromJson(filename))
+    {
+        part->autorelease();
+        return part;
+    }
+    AX_SAFE_DELETE(part);
+    return nullptr;
+}
+
 bool PartOneLayer::init(std::string_view previewImage,
                         std::string_view normalImage,
                         const Vec2& installedOffset,
@@ -48,8 +60,7 @@ bool PartOneLayer::init(std::string_view previewImage,
     }
 
     initNormalTexture(normalImage, texType);
-    _normalSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
-    _normalSprite->setVisible(false);
+    commonInit();
 
     return true;
 }
@@ -129,6 +140,20 @@ void PartOneLayer::loadPropertiesFromJson(JSONBasic* jsonBasic)
     auto normalFileName = jsonBasic->getStringForKey(normalFileNameProp);
     auto normalTexType = static_cast<TextureResType>(jsonBasic->getIntegerForKey(normalTexTypeProp));
     initNormalTexture(normalFileName, normalTexType);
+    commonInit();
+}
+
+void PartOneLayer::commonInit()
+{
+    if (_normalSpriteLoaded)
+    {
+        _normalSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
+        _normalSprite->setVisible(false);
+    }
+    else
+    {
+        AXLOGERROR("Normal sprite is not loaded!");
+    }
 }
 
 } // namespace car

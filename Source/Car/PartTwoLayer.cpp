@@ -51,6 +51,18 @@ PartTwoLayer* PartTwoLayer::create(std::string_view previewImage,
     return nullptr;
 }
 
+PartTwoLayer* PartTwoLayer::createFromJson(std::string_view filename)
+{
+    PartTwoLayer* part = new PartTwoLayer();
+    if (part->loadFromJson(filename))
+    {
+        part->autorelease();
+        return part;
+    }
+    AX_SAFE_DELETE(part);
+    return nullptr;
+}
+
 bool PartTwoLayer::init(std::string_view previewImage,
                         std::string_view normalFrontImage,
                         std::string_view normalBackImage,
@@ -65,22 +77,9 @@ bool PartTwoLayer::init(std::string_view previewImage,
     }
 
     initNormalFrontTexture(normalFrontImage, texType);
-    _normalFrontSprite->setVisible(false);
-
     initNormalBackTexture(normalBackImage, texType);
-    _normalBackSprite->setVisible(false);
 
-    const auto& frontContentSize = _normalFrontSprite->getContentSize();
-    const auto& backContentSize = _normalBackSprite->getContentSize();
-    const auto diffSize = _normalFrontSprite->getContentSize() - _normalBackSprite->getContentSize();
-
-    _normalContentSize.x = std::fmaxf(backContentSize.x / 2.f + backImagePos.x,
-        frontContentSize.x / 2.f + frontImagePos.x);
-    _normalContentSize.y = std::fmaxf(backContentSize.y / 2.f + backImagePos.y,
-        frontContentSize.y / 2.f + frontImagePos.y);
-
-    _normalFrontSprite->setPosition(frontImagePos);
-    _normalBackSprite->setPosition(backImagePos);
+    commonInit(frontImagePos, backImagePos);
 
     return true;
 }
@@ -204,6 +203,35 @@ void PartTwoLayer::loadPropertiesFromJson(JSONBasic* jsonBasic)
     Vec2 backImagePos;
     backImagePos.x = jsonBasic->getFloatForKey(backImagePosXProp);
     backImagePos.y = jsonBasic->getFloatForKey(backImagePosYProp);
+
+    commonInit(frontImagePos, backImagePos);
+}
+
+void PartTwoLayer::commonInit(const Vec2& frontImagePos,
+    const Vec2& backImagePos)
+{
+    if (_normalFrontSpriteLoaded
+        && _normalBackSpriteLoaded)
+    {
+        _normalFrontSprite->setVisible(false);
+        _normalBackSprite->setVisible(false);
+
+        const auto& frontContentSize = _normalFrontSprite->getContentSize();
+        const auto& backContentSize = _normalBackSprite->getContentSize();
+        const auto diffSize = _normalFrontSprite->getContentSize() - _normalBackSprite->getContentSize();
+
+        _normalContentSize.x = std::fmaxf(backContentSize.x / 2.f + backImagePos.x,
+            frontContentSize.x / 2.f + frontImagePos.x);
+        _normalContentSize.y = std::fmaxf(backContentSize.y / 2.f + backImagePos.y,
+            frontContentSize.y / 2.f + frontImagePos.y);
+
+        _normalFrontSprite->setPosition(frontImagePos);
+        _normalBackSprite->setPosition(backImagePos);
+    }
+    else
+    {
+        AXLOGERROR("Normal sprites are not loaded!");
+    }
 }
 
 } // namespace car

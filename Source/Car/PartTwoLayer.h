@@ -18,6 +18,7 @@ public:
                                 const ax::Vec2& backImagePos,
                                 const ax::Vec2& installedOffset = ax::Vec2(),
                                 ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
+    static PartTwoLayer* createFromJson(std::string_view filename);
     bool init(std::string_view previewImage,
               std::string_view normalFrontImage,
               std::string_view normalBackImage,
@@ -40,6 +41,10 @@ protected:
 
     virtual void savePropertiesToJson(ax::extension::JSONBasic* jsonBasic) const override;
     virtual void loadPropertiesFromJson(ax::extension::JSONBasic* jsonBasic) override;
+
+private:
+    void commonInit(const ax::Vec2& frontImagePos,
+        const ax::Vec2& backImagePos);
 
 protected:
     ax::Sprite* _normalFrontSprite;

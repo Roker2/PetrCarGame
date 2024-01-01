@@ -15,6 +15,7 @@ public:
                                 std::string_view normalImage,
                                 const ax::Vec2& installedOffset = ax::Vec2(),
                                 ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
+    static PartOneLayer* createFromJson(std::string_view filename);
     bool init(std::string_view previewImage,
               std::string_view normalImage,
               const ax::Vec2& installedOffset = ax::Vec2(),
@@ -32,6 +33,9 @@ protected:
 
     virtual void savePropertiesToJson(ax::extension::JSONBasic* jsonBasic) const override;
     virtual void loadPropertiesFromJson(ax::extension::JSONBasic* jsonBasic) override;
+
+private:
+    void commonInit();
 
 protected:
     ax::Sprite* _normalSprite;

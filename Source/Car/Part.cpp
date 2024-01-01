@@ -45,6 +45,18 @@ Part* Part::create(std::string_view previewImage,
     return nullptr;
 }
 
+Part* Part::createFromJson(std::string_view filename)
+{
+    Part* part = new Part();
+    if (part->loadFromJson(filename))
+    {
+        part->autorelease();
+        return part;
+    }
+    AX_SAFE_DELETE(part);
+    return nullptr;
+}
+
 bool Part::init(std::string_view previewImage,
     const ax::Vec2& installedOffset,
     ax::ui::Widget::TextureResType texType)
@@ -55,10 +67,8 @@ bool Part::init(std::string_view previewImage,
     }
 
     initPreviewTexture(previewImage, texType);
-    setContentSize(_previewSprite->getContentSize());
-    _previewSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
-
     _installedOffset = installedOffset;
+    commonInit();
 
     return true;
 }
@@ -107,16 +117,22 @@ void Part::saveToJson(std::string_view filename) const
     AX_SAFE_DELETE(jsonBasic);
 }
 
-void Part::loadFromJson(std::string_view filename)
+bool Part::loadFromJson(std::string_view filename)
 {
+    if (!Widget::init())
+    {
+        return false;
+    }
     if (FileUtils::getInstance()->isFileExist(filename))
     {
         auto jsonBasic = new JSONBasic(FileUtils::getInstance()->fullPathForFilename(filename));
         loadPropertiesFromJson(jsonBasic);
+        return true;
     }
     else
     {
         AXLOGERROR("Path %s not exist", filename.data());
+        return false;
     }
 }
 
@@ -163,6 +179,7 @@ void Part::loadPropertiesFromJson(JSONBasic* jsonBasic)
     _installedOffset.x = jsonBasic->getFloatForKey(installedOffsetXProp);
     _installedOffset.y = jsonBasic->getFloatForKey(installedOffsetYProp);
     initPreviewTexture(previewFileName, previewTexType);
+    commonInit();
 }
 
 bool Part::onTouchBegan(ax::Touch* touch, ax::Event* event)
@@ -216,6 +233,19 @@ void Part::onTouchMoved(ax::Touch* touch, ax::Event* event)
 void Part::onTouchEnded(ax::Touch* touch, ax::Event* event)
 {
     Widget::onTouchEnded(touch, event);
+}
+
+void Part::commonInit()
+{
+    if (_previewSpriteLoaded)
+    {
+        setContentSize(_previewSprite->getContentSize());
+        _previewSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
+    }
+    else
+    {
+        AXLOGERROR("Preview sprite is not loaded!");
+    }
 }
 
 } // namespace car
