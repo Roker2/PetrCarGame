@@ -195,7 +195,7 @@ void PartTwoLayer::loadPropertiesFromJson(JSONBasic* jsonBasic)
     initNormalFrontTexture(normalFrontFileName, normalFrontTexType);
     auto normalBackFileName = jsonBasic->getStringForKey(normalBackFileNameProp);
     auto normalBackTexType = static_cast<TextureResType>(jsonBasic->getIntegerForKey(normalBackTexTypeProp));
-    initNormalBackTexture(normalFrontFileName, normalFrontTexType);
+    initNormalBackTexture(normalBackFileName, normalBackTexType);
 
     Vec2 frontImagePos;
     frontImagePos.x = jsonBasic->getFloatForKey(frontImagePosXProp);
