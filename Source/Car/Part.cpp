@@ -12,6 +12,8 @@ const char* previewFileNameProp = "previewFileName";
 const char* previewTexTypeProp = "previewTexType";
 const char* installedOffsetXProp = "installedOffsetX";
 const char* installedOffsetYProp = "installedOffsetY";
+const char* partTypeProp = "partType";
+const char* partNameProp = "partName";
 } // namespace
 
 namespace car
@@ -170,6 +172,8 @@ void Part::savePropertiesToJson(JSONBasic* jsonBasic) const
     jsonBasic->setIntegerForKey(previewTexTypeProp, static_cast<int>(_previewTexType));
     jsonBasic->setFloatForKey(installedOffsetXProp, _installedOffset.x);
     jsonBasic->setFloatForKey(installedOffsetYProp, _installedOffset.y);
+    jsonBasic->setIntegerForKey(partTypeProp, static_cast<int>(getType()));
+    jsonBasic->setStringForKey(partNameProp, getName().data());
 }
 
 void Part::loadPropertiesFromJson(JSONBasic* jsonBasic)
@@ -179,6 +183,7 @@ void Part::loadPropertiesFromJson(JSONBasic* jsonBasic)
     _installedOffset.x = jsonBasic->getFloatForKey(installedOffsetXProp);
     _installedOffset.y = jsonBasic->getFloatForKey(installedOffsetYProp);
     initPreviewTexture(previewFileName, previewTexType);
+    setName(jsonBasic->getStringForKey(partNameProp, ""));
     commonInit();
 }
 
