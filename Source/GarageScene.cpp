@@ -69,6 +69,7 @@ bool GarageScene::init()
     simpleEngine->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
         simpleEngine, std::placeholders::_1, std::placeholders::_2));
     this->addChild(simpleEngine);
+    simpleEngine->setPosition(simpleEngine->getContentSize() / 2);
 
     //auto tracktorFront = car::PartBodyFront::create("thirdPartyContent/parts/tracktorFront.png", "thirdPartyContent/garage/parts/tracktorFront.png");
     //tracktorFront->setName("Tracktor front");
@@ -89,6 +90,7 @@ bool GarageScene::init()
     yellowCarFront->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
         yellowCarFront, std::placeholders::_1, std::placeholders::_2));
     this->addChild(yellowCarFront);
+    yellowCarFront->setPosition(yellowCarFront->getContentSize() / 2);
 
     //auto greenSofa = car::PartSeat::create("thirdPartyContent/parts/greenSofaPreview.png", 
     //    "thirdPartyContent/parts/greenSofaInstalled.png");
@@ -118,6 +120,7 @@ bool GarageScene::init()
     greenCarMiddle->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
         greenCarMiddle, std::placeholders::_1, std::placeholders::_2));
     this->addChild(greenCarMiddle);
+    greenCarMiddle->setPosition(greenCarMiddle->getContentSize() / 2);
 
 #if LOADING_FROM_JSON == 1
     auto policeBack = car::PartBodyRear::createFromJson("thirdPartyContent/parts/policeBack.json");
@@ -133,6 +136,7 @@ bool GarageScene::init()
     policeBack->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
         policeBack, std::placeholders::_1, std::placeholders::_2));
     this->addChild(policeBack);
+    policeBack->setPosition(policeBack->getContentSize() / 2);
 
 
 #if LOADING_FROM_JSON == 1
@@ -147,6 +151,7 @@ bool GarageScene::init()
     redSofa->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
         redSofa, std::placeholders::_1, std::placeholders::_2));
     this->addChild(redSofa);
+    redSofa->setPosition(redSofa->getContentSize() / 2);
 
 #if LOADING_FROM_JSON == 1
     auto fireEngineMiddle = car::PartBodyMiddle::createFromJson("thirdPartyContent/parts/fireEngineMiddle.json");
@@ -163,6 +168,7 @@ bool GarageScene::init()
     fireEngineMiddle->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
         fireEngineMiddle, std::placeholders::_1, std::placeholders::_2));
     this->addChild(fireEngineMiddle);
+    fireEngineMiddle->setPosition(fireEngineMiddle->getContentSize() / 2);
 
 #if LOADING_FROM_JSON == 1
     auto volvoFront = car::PartBodyFront::createFromJson("thirdPartyContent/parts/volvoFront.json");
@@ -176,6 +182,7 @@ bool GarageScene::init()
     volvoFront->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
         volvoFront, std::placeholders::_1, std::placeholders::_2));
     this->addChild(volvoFront);
+    volvoFront->setPosition(volvoFront->getContentSize() / 2);
 
     // scheduleUpdate() is required to ensure update(float) is called on every loop
     scheduleUpdate();
