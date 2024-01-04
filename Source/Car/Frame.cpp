@@ -56,11 +56,7 @@ void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
 #if _AX_DEBUG > 0
                 AXLOG("Catched \"%s\", set to needed position", part->getName().data());
 #endif
-                part->setInstalled();
-                const auto& contentSize = part->getContentSize();
-                part->setPosition(Vec2(partArea->getMinX() + part->getInstalledOffset().x,
-                    partArea->getMinY() + part->getInstalledOffset().y));
-                part->setGlobalZOrder(partArea->getZOrder());
+                partArea->installPart(part);
                 isInstalled = true;
                 break;
             }

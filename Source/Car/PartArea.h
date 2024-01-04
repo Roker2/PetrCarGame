@@ -6,6 +6,8 @@
 namespace car
 {
 
+class Part;
+
 class PartArea : public ax::Rect
 {
 public:
@@ -22,6 +24,7 @@ public:
     float getZOrder() const noexcept;
 
     bool partTypeEquals(PartType partType) const noexcept;
+    void installPart(Part* part);
 
 private:
     PartType _partType;

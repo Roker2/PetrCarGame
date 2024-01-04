@@ -1,5 +1,7 @@
 #include "PartArea.h"
 
+#include "Part.h"
+
 USING_NS_AX;
 
 namespace car
@@ -60,6 +62,15 @@ float PartArea::getZOrder() const noexcept
 bool PartArea::partTypeEquals(PartType partType) const noexcept
 {
     return _partType == partType;
+}
+
+void PartArea::installPart(Part* part)
+{
+    part->setInstalled();
+    const auto& contentSize = part->getContentSize();
+    part->setPosition(Vec2(getMinX() + part->getInstalledOffset().x,
+        getMinY() + part->getInstalledOffset().y));
+    part->setGlobalZOrder(_zOrder);
 }
 
 } // namespace car
