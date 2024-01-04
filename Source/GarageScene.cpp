@@ -148,6 +148,22 @@ bool GarageScene::init()
         redSofa, std::placeholders::_1, std::placeholders::_2));
     this->addChild(redSofa);
 
+#if LOADING_FROM_JSON == 1
+    auto fireEngineMiddle = car::PartBodyMiddle::createFromJson("thirdPartyContent/parts/fireEngineMiddle.json");
+#else
+    auto fireEngineMiddle = car::PartBodyMiddle::create(
+        "thirdPartyContent/parts/fireEngineMiddlePreview.png",
+        "thirdPartyContent/parts/fireEngineMiddleInstalledFront.png",
+        "thirdPartyContent/parts/fireEngineMiddleInstalledBack.png",
+        Vec2(10.f, 4.f),
+        Vec2(0.f, 1.5f),
+        Vec2(65.f, 101.f));
+    fireEngineMiddle->saveToJson("thirdPartyContent/parts/fireEngineMiddle.json");
+#endif
+    fireEngineMiddle->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
+        fireEngineMiddle, std::placeholders::_1, std::placeholders::_2));
+    this->addChild(fireEngineMiddle);
+
     // scheduleUpdate() is required to ensure update(float) is called on every loop
     scheduleUpdate();
 
