@@ -2,15 +2,15 @@
 
 #include "axmol.h"
 
+#include "Part.h"
+#include "PartArea.h"
+
 namespace car
 {
 
-class Part;
-class PartArea;
-
 class Frame : public ax::Sprite
 {
-    using PartAreas = std::vector<PartArea>;
+    using PartAreas = std::vector<PartAreaPtr>;
 
 public:
     Frame();
