@@ -164,6 +164,19 @@ bool GarageScene::init()
         fireEngineMiddle, std::placeholders::_1, std::placeholders::_2));
     this->addChild(fireEngineMiddle);
 
+#if LOADING_FROM_JSON == 1
+    auto volvoFront = car::PartBodyFront::createFromJson("thirdPartyContent/parts/volvoFront.json");
+#else
+    auto volvoFront = car::PartBodyFront::create(
+        "thirdPartyContent/parts/volvoFrontPreview.png",
+        "thirdPartyContent/parts/volvoFrontInstalled.png",
+        Vec2(67.f, -11.5f));
+    volvoFront->saveToJson("thirdPartyContent/parts/volvoFront.json");
+#endif
+    volvoFront->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
+        volvoFront, std::placeholders::_1, std::placeholders::_2));
+    this->addChild(volvoFront);
+
     // scheduleUpdate() is required to ensure update(float) is called on every loop
     scheduleUpdate();
 
