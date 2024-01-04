@@ -10,6 +10,7 @@ namespace car
 PartArea::PartArea()
     : Rect()
     , _partType(PartType::None)
+    , _installedPart(nullptr)
 {
 }
 
@@ -33,6 +34,7 @@ PartArea::PartArea(const PartArea& other)
     : Rect(other)
     , _partType(other._partType)
     , _zOrder(other._zOrder)
+    , _installedPart(nullptr)
 {
 }
 
@@ -64,13 +66,9 @@ bool PartArea::partTypeEquals(PartType partType) const noexcept
     return _partType == partType;
 }
 
-void PartArea::installPart(Part* part)
+void PartArea::setInstalledPart(Part* part)
 {
-    part->setInstalled();
-    const auto& contentSize = part->getContentSize();
-    part->setPosition(Vec2(getMinX() + part->getInstalledOffset().x,
-        getMinY() + part->getInstalledOffset().y));
-    part->setGlobalZOrder(_zOrder);
+    _installedPart = part;
 }
 
 } // namespace car

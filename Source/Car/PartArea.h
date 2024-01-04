@@ -24,11 +24,12 @@ public:
     float getZOrder() const noexcept;
 
     bool partTypeEquals(PartType partType) const noexcept;
-    void installPart(Part* part);
+    void setInstalledPart(Part* part);
 
 private:
     PartType _partType;
     float _zOrder;
+    Part* _installedPart;
 };
 
 using PartAreaPtr = std::shared_ptr<PartArea>;
