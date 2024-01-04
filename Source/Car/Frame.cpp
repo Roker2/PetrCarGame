@@ -31,15 +31,15 @@ bool Frame::initWithFile(std::string_view filename, PixelFormat format)
     }
 
     _partAreas.push_back(
-        std::make_shared<PartArea>(237.f, 165.f, 73.f, 81.f, PartType::Engine, 12.f));
+        std::make_shared<PartArea>(237.f, 165.f, 73.f, 81.f, PartType::Engine, 13.f));
     _partAreas.push_back(
-        std::make_shared<PartArea>(360.f, 186.f, 72.f, 103.f, PartType::Seat, 8.f));
+        std::make_shared<PartArea>(360.f, 186.f, 72.f, 103.f, PartType::Seat, 9.f));
     _partAreas.push_back(
-        std::make_shared<PartArea>(207.f, 202.f, 190.f, 54.f, PartType::BodyFront, 14.f));
+        std::make_shared<PartArea>(207.f, 202.f, 190.f, 54.f, PartType::BodyFront, 15.f));
     _partAreas.push_back(
-        std::make_shared<PartArea>(342.f, 202.f, 49.f, 128.f, PartType::BodyMiddle, 10.f));
+        std::make_shared<PartArea>(342.f, 202.f, 49.f, 128.f, PartType::BodyMiddle, 11.f));
     _partAreas.push_back(
-        std::make_shared<PartArea>(465.f, 181.f, 49.f, 125.f, PartType::BodyRear, 5.f));
+        std::make_shared<PartArea>(465.f, 181.f, 49.f, 125.f, PartType::BodyRear, 6.f));
     return true;
 }
 
