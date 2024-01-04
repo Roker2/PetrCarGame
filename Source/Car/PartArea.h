@@ -29,5 +29,6 @@ private:
 };
 
 using PartAreaPtr = std::shared_ptr<PartArea>;
+using PartAreaWPtr = std::weak_ptr<PartArea>;
 
 } // namespace car
