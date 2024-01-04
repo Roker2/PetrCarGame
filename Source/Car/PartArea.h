@@ -28,4 +28,6 @@ private:
     float _zOrder;
 };
 
+using PartAreaPtr = std::shared_ptr<PartArea>;
+
 } // namespace car
