@@ -80,7 +80,8 @@ bool GarageScene::init()
 #else
     auto simpleEngine = car::PartEngine::create("thirdPartyContent/parts/simpleEngine.png",
         "thirdPartyContent/parts/simpleEngine.png",
-        Vec2(28.f, 31.f));
+        Vec2(28.f, 31.f),
+        "thirdPartyContent/parts/sounds/smallPartsInstall.wav");
     simpleEngine->setName("Simple engine");
     simpleEngine->saveToJson("thirdPartyContent/parts/simpleEngine.json");
 #endif
@@ -101,7 +102,8 @@ bool GarageScene::init()
     auto yellowCarFront = car::PartBodyFront::create(
         "thirdPartyContent/parts/yellowCarFront.png",
         "thirdPartyContent/parts/yellowCarFront.png",
-        Vec2(52.f, 4.f));
+        Vec2(52.f, 4.f),
+        "thirdPartyContent/parts/sounds/bodyPartsInstall.wav");
     yellowCarFront->setName("Yellow car front");
     yellowCarFront->saveToJson("thirdPartyContent/parts/yellowCarFront.json");
 #endif
@@ -132,7 +134,8 @@ bool GarageScene::init()
         "thirdPartyContent/parts/greenCarMiddleInstalledBack.png",
         Vec2(93.f, 87.f),
         Vec2(98.f, 111.f),
-        Vec2(28.f, 29.5f));
+        Vec2(28.f, 29.5f),
+        "thirdPartyContent/parts/sounds/bodyPartsInstall.wav");
     greenCarMiddle->saveToJson("thirdPartyContent/parts/greenCarMiddle.json");
 #endif
     greenCarMiddle->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
@@ -148,7 +151,8 @@ bool GarageScene::init()
         "thirdPartyContent/parts/policeBackInstalledBack.png",
         Vec2(130.f, 86.5f),
         Vec2(62.5f, 121.f),
-        Vec2(28.5f, 63.f));
+        Vec2(28.5f, 63.f),
+        "thirdPartyContent/parts/sounds/bodyPartsInstall.wav");
     policeBack->saveToJson("thirdPartyContent/parts/policeBack.json");
 #endif
     policeBack->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
@@ -162,7 +166,8 @@ bool GarageScene::init()
 #else
     auto redSofa = car::PartSeat::create("thirdPartyContent/parts/redSofa.png", 
         "thirdPartyContent/parts/redSofa.png",
-        Vec2(28.f, 28.5f));
+        Vec2(28.f, 28.5f),
+        "thirdPartyContent/parts/sounds/smallPartsInstall.wav");
     redSofa->setName("Red sofa");
     redSofa->saveToJson("thirdPartyContent/parts/redSofa.json");
 #endif
@@ -180,7 +185,8 @@ bool GarageScene::init()
         "thirdPartyContent/parts/fireEngineMiddleInstalledBack.png",
         Vec2(10.f, 4.f),
         Vec2(0.f, 1.5f),
-        Vec2(65.f, 101.f));
+        Vec2(65.f, 101.f),
+        "thirdPartyContent/parts/sounds/bodyPartsInstall.wav");
     fireEngineMiddle->saveToJson("thirdPartyContent/parts/fireEngineMiddle.json");
 #endif
     fireEngineMiddle->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
@@ -194,7 +200,8 @@ bool GarageScene::init()
     auto volvoFront = car::PartBodyFront::create(
         "thirdPartyContent/parts/volvoFrontPreview.png",
         "thirdPartyContent/parts/volvoFrontInstalled.png",
-        Vec2(67.f, -11.5f));
+        Vec2(67.f, -11.5f),
+        "thirdPartyContent/parts/sounds/bodyPartsInstall.wav");
     volvoFront->saveToJson("thirdPartyContent/parts/volvoFront.json");
 #endif
     volvoFront->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
