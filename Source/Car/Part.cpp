@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "PartArea.h"
+
 USING_NS_AX;
 USING_NS_AX_EXT;
 
@@ -29,6 +31,7 @@ Part::Part()
     , _onTouchMovingCallback(nullptr)
     , _isInstalled(false)
     , _installedOffset()
+    , _currentArea(nullptr)
 {
     setTouchEnabled(true);
 }
@@ -103,6 +106,16 @@ bool Part::getIsInstalled() const noexcept
 const Vec2& Part::getInstalledOffset() const noexcept
 {
     return _installedOffset;
+}
+
+void Part::setCurrentArea(PartArea* partArea) noexcept
+{
+    _currentArea = partArea;
+}
+
+PartArea* Part::getCurrentArea() const noexcept
+{
+    return _currentArea;
 }
 
 void Part::saveToJson(std::string_view filename) const
@@ -198,7 +211,6 @@ bool Part::onTouchBegan(ax::Touch* touch, ax::Event* event)
 #if _AX_DEBUG > 0
         AXLOG("Part contain touch");
 #endif
-        setPosition(touch->getLocation());
         return true;
     }
     return false;

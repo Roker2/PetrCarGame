@@ -47,11 +47,21 @@ void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
 {
     if (part != nullptr)
     {
+        if (PartArea* partArea = part->getCurrentArea();
+            partArea != nullptr
+            && partArea->containsPoint(touch->getLocation()))
+        {
+            part->setPosition(Vec2(partArea->getMinX() + part->getInstalledOffset().x,
+                partArea->getMinY() + part->getInstalledOffset().y));
+            return;
+        }
+
         bool isInstalled{ false };
         for (const auto& partArea : _partAreas)
         {
             if (partArea->partTypeEquals(part->getType())
-                && partArea->containsPoint(touch->getLocation()))
+                && partArea->containsPoint(touch->getLocation())
+                && partArea->getInstalledPart() == nullptr)
             {
 #if _AX_DEBUG > 0
                 AXLOG("Catched \"%s\", set to needed position", part->getName().data());
@@ -62,6 +72,7 @@ void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
                     partArea->getMinY() + part->getInstalledOffset().y));
                 part->setGlobalZOrder(partArea->getZOrder());
                 partArea->setInstalledPart(part);
+                part->setCurrentArea(partArea.get());
                 isInstalled = true;
                 break;
             }
@@ -70,6 +81,12 @@ void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
         if (!isInstalled)
         {
             part->setPreview();
+            PartArea* partArea = part->getCurrentArea();
+            if (partArea != nullptr)
+            {
+                partArea->setInstalledPart(nullptr);
+            }
+            part->setCurrentArea(nullptr);
         }
     }
 }

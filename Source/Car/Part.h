@@ -13,6 +13,8 @@ namespace ax::extension
 namespace car
 {
 
+class PartArea;
+
 class Part : public ax::ui::Widget
 {
     using onTouchMovingCallback = std::function<void(ax::Touch*, ax::Event*)>;
@@ -36,6 +38,8 @@ public:
     virtual void setPreview();
     bool getIsInstalled() const noexcept;
     const ax::Vec2& getInstalledOffset() const noexcept;
+    void setCurrentArea(PartArea* partArea) noexcept;
+    PartArea* getCurrentArea() const noexcept;
 
     void saveToJson(std::string_view filename) const;
     bool loadFromJson(std::string_view filename);
@@ -71,6 +75,7 @@ protected:
     onTouchMovingCallback _onTouchMovingCallback;
     bool _isInstalled;
     ax::Vec2 _installedOffset;
+    PartArea* _currentArea;
 };
 
 } // namespace car

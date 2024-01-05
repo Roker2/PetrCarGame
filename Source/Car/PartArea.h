@@ -25,6 +25,7 @@ public:
 
     bool partTypeEquals(PartType partType) const noexcept;
     void setInstalledPart(Part* part);
+    Part* getInstalledPart() const noexcept;
 
 private:
     PartType _partType;

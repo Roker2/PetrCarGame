@@ -19,6 +19,7 @@ PartArea::PartArea(float x, float y, float width, float height, PartType partTyp
     : Rect(x, y, width, height)
     , _partType(partType)
     , _zOrder(zOrder)
+    , _installedPart(nullptr)
 {
 }
 
@@ -27,6 +28,7 @@ PartArea::PartArea(const Vec2& pos, const Vec2& dimension, PartType partType,
     : Rect(pos, dimension)
     , _partType(partType)
     , _zOrder(zOrder)
+    , _installedPart(nullptr)
 {
 }
 
@@ -69,6 +71,11 @@ bool PartArea::partTypeEquals(PartType partType) const noexcept
 void PartArea::setInstalledPart(Part* part)
 {
     _installedPart = part;
+}
+
+Part* PartArea::getInstalledPart() const noexcept
+{
+    return _installedPart;
 }
 
 } // namespace car
