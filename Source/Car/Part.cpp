@@ -8,6 +8,8 @@
 USING_NS_AX;
 USING_NS_AX_EXT;
 
+#define MOVING_INTERNAL_PARENT 0
+
 namespace
 {
 const char* previewFileNameProp = "previewFileName";
@@ -220,6 +222,7 @@ void Part::onTouchMoved(ax::Touch* touch, ax::Event* event)
 {
     Widget::onTouchMoved(touch, event);
     auto newPos = getPosition() + touch->getDelta();
+#if MOVING_INTERNAL_PARENT == 1
     if (const auto parent = getParent();
         parent)
     {
@@ -238,7 +241,8 @@ void Part::onTouchMoved(ax::Touch* touch, ax::Event* event)
     {
         AXLOGWARN("No part parent");
     }
-#endif
+#endif // _AX_DEBUG > 0
+#endif // MOVING_INTERNAL_PARENT == 1
     setPosition(newPos);
 
     if (_onTouchMovingCallback)
