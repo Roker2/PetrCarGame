@@ -30,6 +30,8 @@ bool Frame::initWithFile(std::string_view filename, PixelFormat format)
         return false;
     }
 
+    setGlobalZOrder(1.f);
+
     _partAreas.push_back(
         std::make_shared<PartArea>(237.f, 165.f, 73.f, 81.f, PartType::Engine, 13.f));
     _partAreas.push_back(
