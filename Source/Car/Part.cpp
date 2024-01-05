@@ -258,6 +258,7 @@ void Part::commonInit()
     {
         setContentSize(_previewSprite->getContentSize());
         _previewSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
+        _previewSprite->setGlobalZOrder(16.f);
     }
     else
     {
