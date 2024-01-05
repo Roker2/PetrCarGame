@@ -18,6 +18,7 @@ const char* installedOffsetXProp = "installedOffsetX";
 const char* installedOffsetYProp = "installedOffsetY";
 const char* partTypeProp = "partType";
 const char* partNameProp = "partName";
+const char* installSoundPathProp = "installSoundPath";
 } // namespace
 
 namespace car
@@ -194,6 +195,7 @@ void Part::savePropertiesToJson(JSONBasic* jsonBasic) const
     jsonBasic->setFloatForKey(installedOffsetYProp, _installedOffset.y);
     jsonBasic->setIntegerForKey(partTypeProp, static_cast<int>(getType()));
     jsonBasic->setStringForKey(partNameProp, getName().data());
+    jsonBasic->setStringForKey(installSoundPathProp, _installSoundPath.c_str());
 }
 
 void Part::loadPropertiesFromJson(JSONBasic* jsonBasic)
@@ -204,6 +206,7 @@ void Part::loadPropertiesFromJson(JSONBasic* jsonBasic)
     _installedOffset.y = jsonBasic->getFloatForKey(installedOffsetYProp);
     initPreviewTexture(previewFileName, previewTexType);
     setName(jsonBasic->getStringForKey(partNameProp, ""));
+    _installSoundPath = jsonBasic->getStringForKey(installSoundPathProp);
     commonInit();
 }
 
