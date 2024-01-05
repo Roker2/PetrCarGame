@@ -213,6 +213,10 @@ bool Part::onTouchBegan(ax::Touch* touch, ax::Event* event)
 #if _AX_DEBUG > 0
         AXLOG("Part contain touch");
 #endif
+        if (_currentArea == nullptr)
+        {
+            setPosition(touch->getLocation());
+        }
         return true;
     }
     return false;
@@ -221,7 +225,7 @@ bool Part::onTouchBegan(ax::Touch* touch, ax::Event* event)
 void Part::onTouchMoved(ax::Touch* touch, ax::Event* event)
 {
     Widget::onTouchMoved(touch, event);
-    auto newPos = getPosition() + touch->getDelta();
+    auto newPos = touch->getLocation();
 #if MOVING_INTERNAL_PARENT == 1
     if (const auto parent = getParent();
         parent)
