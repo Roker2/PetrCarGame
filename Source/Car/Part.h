@@ -1,6 +1,7 @@
 #pragma once
 
 #include "axmol.h"
+#include "audio/AudioEngine.h"
 #include "ui/UIWidget.h"
 #include "rapidjson/document.h"
 #include "PartType.h"
@@ -25,10 +26,12 @@ public:
 
     static Part* create(std::string_view previewImage,
                         const ax::Vec2& installedOffset = ax::Vec2(),
+                        std::string_view installSoundPath = "",
                         ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
     static Part* createFromJson(std::string_view filename);
     bool init(std::string_view previewImage,
               const ax::Vec2& installedOffset = ax::Vec2(),
+              std::string_view installSoundPath = "",
               ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
 
     void SetOnTouchMovingCallback(onTouchMovingCallback callback) noexcept;
@@ -60,6 +63,7 @@ private:
     void onTouchEnded(ax::Touch* touch, ax::Event* event) override;
 
     void commonInit();
+    void playInstallSound();
 
 public:
     size_t weight;
@@ -76,6 +80,9 @@ protected:
     bool _isInstalled;
     ax::Vec2 _installedOffset;
     PartArea* _currentArea;
+
+    std::string _installSoundPath;
+    AUDIO_ID _installSoundId;
 };
 
 } // namespace car

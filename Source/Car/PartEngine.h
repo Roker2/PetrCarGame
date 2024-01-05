@@ -13,6 +13,7 @@ public:
     static PartEngine* create(std::string_view previewImage,
                               std::string_view normalImage,
                               const ax::Vec2& installedOffset = ax::Vec2(),
+                              std::string_view installSoundPath = "",
                               ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
     static PartEngine* createFromJson(std::string_view filename);
 

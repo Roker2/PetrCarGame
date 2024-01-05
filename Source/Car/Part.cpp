@@ -34,16 +34,19 @@ Part::Part()
     , _isInstalled(false)
     , _installedOffset()
     , _currentArea(nullptr)
+    , _installSoundId(AudioEngine::INVALID_AUDIO_ID)
+    , _installSoundPath("")
 {
     setTouchEnabled(true);
 }
 
 Part* Part::create(std::string_view previewImage,
     const ax::Vec2& installedOffset,
+    std::string_view installSoundPath,
     ax::ui::Widget::TextureResType texType)
 {
     Part* part = new Part();
-    if (part->init(previewImage, installedOffset, texType))
+    if (part->init(previewImage, installedOffset, installSoundPath, texType))
     {
         part->autorelease();
         return part;
@@ -66,6 +69,7 @@ Part* Part::createFromJson(std::string_view filename)
 
 bool Part::init(std::string_view previewImage,
     const ax::Vec2& installedOffset,
+    std::string_view installSoundPath,
     ax::ui::Widget::TextureResType texType)
 {
     if (!Widget::init())
@@ -75,6 +79,7 @@ bool Part::init(std::string_view previewImage,
 
     initPreviewTexture(previewImage, texType);
     _installedOffset = installedOffset;
+    _installSoundPath = installSoundPath;
     commonInit();
 
     return true;
@@ -92,12 +97,12 @@ PartType Part::getType() const noexcept
 
 void Part::setInstalled()
 {
-
+    playInstallSound();
 }
 
 void Part::setPreview()
 {
-
+    playInstallSound();
 }
 
 bool Part::getIsInstalled() const noexcept
@@ -267,10 +272,26 @@ void Part::commonInit()
         setContentSize(_previewSprite->getContentSize());
         _previewSprite->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
         _previewSprite->setGlobalZOrder(16.f);
+        if (!_installSoundPath.empty())
+        {
+            AudioEngine::preload(_installSoundPath);
+        }
     }
     else
     {
         AXLOGERROR("Preview sprite is not loaded!");
+    }
+}
+
+void Part::playInstallSound()
+{
+    if (const auto state = AudioEngine::getState(_installSoundId);
+        !_installSoundPath.empty()
+        && (_installSoundId == AudioEngine::INVALID_AUDIO_ID
+        || state == AudioEngine::AudioState::PAUSED
+        || state == AudioEngine::AudioState::ERROR))
+    {
+        _installSoundId = AudioEngine::play2d(_installSoundPath);
     }
 }
 

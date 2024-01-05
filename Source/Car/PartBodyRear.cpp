@@ -15,11 +15,12 @@ PartBodyRear* PartBodyRear::create(std::string_view previewImage,
     const ax::Vec2& frontImagePos,
     const ax::Vec2& backImagePos,
     const ax::Vec2& installedOffset,
+    std::string_view installSoundPath,
     TextureResType texType)
 {
     PartBodyRear* part = new PartBodyRear();
     if (part->init(previewImage, normalFrontImage, normalBackImage,
-        frontImagePos, backImagePos, installedOffset, texType))
+        frontImagePos, backImagePos, installedOffset, installSoundPath, texType))
     {
         part->autorelease();
         return part;

@@ -18,6 +18,7 @@ public:
         const ax::Vec2& frontImagePos,
         const ax::Vec2& backImagePos,
         const ax::Vec2& installedOffset = ax::Vec2(),
+        std::string_view installSoundPath = "",
         ax::ui::Widget::TextureResType texType = TextureResType::LOCAL);
     static PartBodyMiddle* createFromJson(std::string_view filename);
 

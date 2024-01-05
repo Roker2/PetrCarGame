@@ -13,10 +13,11 @@ PartBodyFront::PartBodyFront()
 PartBodyFront* PartBodyFront::create(std::string_view previewImage,
                            std::string_view normalImage,
                            const ax::Vec2& installedOffset,
+                           std::string_view installSoundPath,
                            TextureResType texType)
 {
     PartBodyFront* part = new PartBodyFront();
-    if (part->init(previewImage, normalImage, installedOffset, texType))
+    if (part->init(previewImage, normalImage, installedOffset, installSoundPath, texType))
     {
         part->autorelease();
         return part;

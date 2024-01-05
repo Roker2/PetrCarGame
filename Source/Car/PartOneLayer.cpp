@@ -25,10 +25,11 @@ PartOneLayer::PartOneLayer()
 PartOneLayer* PartOneLayer::create(std::string_view previewImage,
                                    std::string_view normalImage,
                                    const Vec2& installedOffset,
+                                   std::string_view installSoundPath,
                                    ui::Widget::TextureResType texType)
 {
     PartOneLayer* part = new PartOneLayer();
-    if (part->init(previewImage, normalImage, installedOffset, texType))
+    if (part->init(previewImage, normalImage, installedOffset, installSoundPath, texType))
     {
         part->autorelease();
         return part;
@@ -52,9 +53,10 @@ PartOneLayer* PartOneLayer::createFromJson(std::string_view filename)
 bool PartOneLayer::init(std::string_view previewImage,
                         std::string_view normalImage,
                         const Vec2& installedOffset,
+                        std::string_view installSoundPath,
                         ui::Widget::TextureResType texType)
 {
-    if (!Part::init(previewImage, installedOffset, texType))
+    if (!Part::init(previewImage, installedOffset, installSoundPath, texType))
     {
         return false;
     }

@@ -12,10 +12,11 @@ PartSeat::PartSeat()
 PartSeat* PartSeat::create(std::string_view previewImage,
                            std::string_view normalImage,
                            const ax::Vec2& installedOffset,
+                           std::string_view installSoundPath,
                            TextureResType texType)
 {
     PartSeat* part = new PartSeat();
-    if (part->init(previewImage, normalImage, installedOffset, texType))
+    if (part->init(previewImage, normalImage, installedOffset, installSoundPath, texType))
     {
         part->autorelease();
         return part;
