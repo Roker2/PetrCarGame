@@ -67,6 +67,7 @@ bool PartOneLayer::init(std::string_view previewImage,
 
 void PartOneLayer::setInstalled()
 {
+    Part::setInstalled();
     if (_isInstalled)
     {
         return;
@@ -79,6 +80,7 @@ void PartOneLayer::setInstalled()
 
 void PartOneLayer::setPreview()
 {
+    Part::setPreview();
     if (!_isInstalled)
     {
         return;

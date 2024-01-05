@@ -86,6 +86,7 @@ bool PartTwoLayer::init(std::string_view previewImage,
 
 void PartTwoLayer::setInstalled()
 {
+    Part::setInstalled();
     if (_isInstalled)
     {
         return;
@@ -99,6 +100,7 @@ void PartTwoLayer::setInstalled()
 
 void PartTwoLayer::setPreview()
 {
+    Part::setPreview();
     if (!_isInstalled)
     {
         return;
