@@ -80,7 +80,7 @@ void Frame::onPartTouchMoved(Part* part, Touch* touch, Event* event)
             }
         }
         // Roker2: refactor it later
-        if (!isInstalled)
+        if (!isInstalled && part->getIsInstalled())
         {
             part->setPreview();
             PartArea* partArea = part->getCurrentArea();
