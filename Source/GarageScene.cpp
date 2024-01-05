@@ -57,6 +57,24 @@ bool GarageScene::init()
     carFrame->setPosition(Vec2(378.f, 185.f));
     this->addChild(carFrame);
 
+    Sprite* leftFrontWheel = Sprite::create("thirdPartyContent/parts/redWheelInstalledLeft.png");
+    this->addChild(leftFrontWheel);
+    leftFrontWheel->setGlobalZOrder(16.f);
+    leftFrontWheel->setPosition(Vec2(288.5f, 138.f));
+    Sprite* rightFrontWheel = Sprite::create("thirdPartyContent/parts/redWheelInstalledRight.png");
+    this->addChild(rightFrontWheel);
+    rightFrontWheel->setGlobalZOrder(0.f);
+    rightFrontWheel->setPosition(Vec2(215.5f, 204.5f));
+
+    Sprite* leftRearWheel = Sprite::create("thirdPartyContent/parts/redWheelInstalledLeft.png");
+    this->addChild(leftRearWheel);
+    leftRearWheel->setGlobalZOrder(16.f);
+    leftRearWheel->setPosition(Vec2(515.5f, 155.f));
+    Sprite* rightRearWheel = Sprite::create("thirdPartyContent/parts/redWheelInstalledRight.png");
+    this->addChild(rightRearWheel);
+    rightRearWheel->setGlobalZOrder(0.f);
+    rightRearWheel->setPosition(Vec2(442.5f, 221.5f));
+
 #if LOADING_FROM_JSON == 1
     auto simpleEngine = car::PartEngine::createFromJson("thirdPartyContent/parts/simpleEngine.json");
 #else
