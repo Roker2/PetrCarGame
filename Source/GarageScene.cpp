@@ -7,6 +7,7 @@
 #include "Car/PartEngine.h"
 #include "Car/PartOneLayer.h"
 #include "Car/PartSeat.h"
+#include "Car/PartGearbox.h"
 #include "Car/PartTwoLayer.h"
 #include "Controls/DoorButton.h"
 
@@ -208,6 +209,21 @@ bool GarageScene::init()
         volvoFront, std::placeholders::_1, std::placeholders::_2));
     this->addChild(volvoFront);
     volvoFront->setPosition(volvoFront->getContentSize() / 2);
+
+#if LOADING_FROM_JSON == 1
+    auto simpleGeagbox = car::PartGearbox::createFromJson("thirdPartyContent/parts/simpleGeagbox.json");
+#else
+    auto simpleGeagbox = car::PartGearbox::create(
+        "thirdPartyContent/parts/simpleGearbox.png",
+        "thirdPartyContent/parts/simpleGearbox.png",
+        Vec2(8.5f, 27.f),
+        "thirdPartyContent/parts/sounds/smallPartsInstall.wav");
+    simpleGeagbox->saveToJson("thirdPartyContent/parts/simpleGeagbox.json");
+#endif
+    simpleGeagbox->SetOnTouchMovingCallback(std::bind(&car::Frame::onPartTouchMoved, carFrame,
+        simpleGeagbox, std::placeholders::_1, std::placeholders::_2));
+    this->addChild(simpleGeagbox);
+    simpleGeagbox->setPosition(simpleGeagbox->getContentSize() / 2);
 
     // scheduleUpdate() is required to ensure update(float) is called on every loop
     scheduleUpdate();
