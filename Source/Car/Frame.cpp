@@ -39,6 +39,8 @@ bool Frame::initWithFile(std::string_view filename, PixelFormat format)
     _partAreas.push_back(
         std::make_shared<PartArea>(360.f, 186.f, 72.f, 103.f, PartType::Seat, 9.f));
     _partAreas.push_back(
+        std::make_shared<PartArea>(311.f, 209.f, 29.f, 100.f, PartType::SteeringWheel, 10.f));
+    _partAreas.push_back(
         std::make_shared<PartArea>(207.f, 202.f, 190.f, 54.f, PartType::BodyFront, 15.f));
     _partAreas.push_back(
         std::make_shared<PartArea>(342.f, 202.f, 49.f, 128.f, PartType::BodyMiddle, 11.f));
